@@ -10,4 +10,3 @@ git clone -b monolith https://github.com/express42/reddit.git ~/reddit
 cd ~/reddit && bundle install
 
 cd ~/reddit && puma -d
-ps aux | grep puma
