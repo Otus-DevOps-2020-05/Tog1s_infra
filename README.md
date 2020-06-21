@@ -40,7 +40,7 @@ Host someinternalhost
 
 ## ДЗ №4
 
-testapp_IP=35.198.167.169
+testapp_IP=130.193.38.104
 
 testapp_port=9292
 
