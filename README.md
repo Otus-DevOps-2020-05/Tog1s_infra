@@ -37,3 +37,32 @@ Host someinternalhost
 Сертификат обновлен для:
 
 [https://84.201.135.97.sslip.io](https://84.201.135.97.sslip.io)
+
+## ДЗ №4
+
+testapp_IP=35.198.167.169
+
+testapp_port=9292
+
+### Самостоятельное задание
+
+Добавлены скрипты:
+
+install_ruby.sh
+
+install_mongodb.sh
+
+deploy.sh
+
+### Дополнительное задание
+
+```bash
+yc compute instance create \
+--name reddit-app \
+--hostname reddit-app \
+--memory=4 \
+--create-boot-disk image-folder-id=standard-images,image-family=ubuntu-1604-lts,size=10GB \
+--network-interface subnet-name=default-ru-central1-a,nat-ip-version=ipv4 \
+--metadata serial-port-enable=1 \
+--metadata-from-file user-data=./startup.yaml
+```
