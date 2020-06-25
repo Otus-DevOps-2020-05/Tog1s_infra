@@ -66,3 +66,14 @@ yc compute instance create \
 --metadata serial-port-enable=1 \
 --metadata-from-file user-data=./startup.yaml
 ```
+
+## ДЗ №5
+
+- Создан образ VM с помощью packer (packer/ubuntu16.json)
+- В шаблон интегрированы bash скрипты для установки ruby и mongodb (packer/scripts)
+- Проверена работоспособность образа
+- Самостоятельное задание. Выполнено параметризирование шаблона (packer/variables.json.example)
+- Самостоятельное задание. Добавлены переменные в файл (packer/variables.json.example)
+- Дополнительное задание. Выполнена конфигурация bake-образа (packer/immutable.json)
+- Дополнительное задание. Создан скрипт для создания VM create-reddit-vm.sh (config-scripts/create-reddit-vm.sh)
+- Проверена работоспособность bake-образа, после создания машины приложение отвечает по порту 9292
