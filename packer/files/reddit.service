@@ -1,0 +1,13 @@
+[Unit]
+Description=Puma HTTP Server
+After=network.target
+
+[Service]
+Type=simple
+
+ExecStart=/usr/local/bin/puma --dir /srv/reddit --pidfile /srv/reddit/puma.pid
+
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
