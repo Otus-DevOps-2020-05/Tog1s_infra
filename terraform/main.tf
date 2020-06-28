@@ -6,7 +6,8 @@ provider "yandex" {
 }
 
 resource "yandex_compute_instance" "app" {
-  name = "reddit-app"
+  count = 2
+  name  = "reddit-app-${count.index}"
 
   resources {
     cores  = 1
@@ -21,7 +22,7 @@ resource "yandex_compute_instance" "app" {
   }
 
   network_interface {
-    subnet_id = var.subnet_id.default
+    subnet_id = var.subnet_id
     nat       = true
   }
 
@@ -30,10 +31,10 @@ resource "yandex_compute_instance" "app" {
   }
 
   connection {
-    type  = "ssh"
-    host  = yandex_compute_instance.app.network_interface.0.nat_ip_address
-    user  = "ubuntu"
-    agent = false
+    type        = "ssh"
+    host        = self.network_interface.0.nat_ip_address
+    user        = "ubuntu"
+    agent       = false
     private_key = file(var.private_key_path)
   }
 
