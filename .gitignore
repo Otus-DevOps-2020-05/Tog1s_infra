@@ -3,3 +3,9 @@
 key.json
 packer/variables.json
 packer/immutable_var.json
+
+*.tfstate
+*.tfstate.*.backup
+*.tfstate.backup
+*.tfvars
+.terraform/
