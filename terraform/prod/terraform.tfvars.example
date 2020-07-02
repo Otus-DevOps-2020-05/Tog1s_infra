@@ -5,6 +5,9 @@ subnet_id = "ab..z"
 
 zone = "ru-central1-a"
 
-public_key_path          = "~/.ssh/ubuntu.pub"
-private_key_path         = "~/.ssh/ubuntu"
+public_key_path          = "~/.ssh/appuser.pub"
+private_key_path         = "~/.ssh/appuser"
 service_account_key_file = "../key.json"
+
+app_disk_image = "ab..z"
+db_disk_image  = "ab..z"
