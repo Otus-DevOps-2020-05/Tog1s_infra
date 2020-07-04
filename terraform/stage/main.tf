@@ -6,25 +6,18 @@ provider "yandex" {
 }
 
 module "app" {
-  source          = "../modules/app"
-  public_key_path = var.public_key_path
-  app_disk_image  = var.app_disk_image
-  subnet_id       = var.subnet_id
+  source           = "../modules/app"
+  public_key_path  = var.public_key_path
+  private_key_path = var.private_key_path
+  app_disk_image   = var.app_disk_image
+  subnet_id        = var.subnet_id
+  db_private_ip    = module.db.internal_ip_address_db
 }
 
 module "db" {
-  source          = "../modules/db"
-  public_key_path = var.public_key_path
-  db_disk_image   = var.db_disk_image
-  subnet_id       = var.subnet_id
+  source           = "../modules/db"
+  public_key_path  = var.public_key_path
+  private_key_path = var.private_key_path
+  db_disk_image    = var.db_disk_image
+  subnet_id        = var.subnet_id
 }
-
-#   provisioner "file" {
-#     source      = "files/puma.service"
-#     destination = "/tmp/puma.service"
-#   }
-
-#   provisioner "remote-exec" {
-#     script = "files/deploy.sh"
-#   }
-# }

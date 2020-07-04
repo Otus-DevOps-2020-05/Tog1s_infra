@@ -5,9 +5,9 @@ subnet_id = "ab..z"
 
 zone = "ru-central1-a"
 
-public_key_path          = "~/.ssh/appuser.pub"
-private_key_path         = "~/.ssh/appuser"
-service_account_key_file = "../key.json"
+public_key_path          = ""
+private_key_path         = ""
+service_account_key_file = ""
 
 app_disk_image = "ab..z"
 db_disk_image  = "ab..z"

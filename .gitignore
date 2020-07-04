@@ -9,3 +9,5 @@ packer/immutable_var.json
 *.tfstate.backup
 *.tfvars
 .terraform/
+
+**/backend.tf

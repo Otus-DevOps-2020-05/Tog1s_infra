@@ -31,3 +31,7 @@ variable db_disk_image {
   description = "Disk image for reddit app"
   default     = "reddit-db-base"
 }
+variable db_private_ip {
+  default     = "localhost"
+  description = "Database instance ip"
+}
