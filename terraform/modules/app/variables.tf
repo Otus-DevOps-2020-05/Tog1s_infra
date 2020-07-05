@@ -14,3 +14,7 @@ variable subnet_id {
 variable db_private_ip {
   description = "Database instance ip"
 }
+variable provision_enable {
+  description = "Provision switch"
+  default     = false
+}

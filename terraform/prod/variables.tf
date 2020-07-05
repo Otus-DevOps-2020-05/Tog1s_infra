@@ -35,3 +35,7 @@ variable db_private_ip {
   default     = "localhost"
   description = "Database instance ip"
 }
+variable provision_enable {
+  description = "Provision switch"
+  default     = false
+}

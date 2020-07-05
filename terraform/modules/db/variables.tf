@@ -11,3 +11,7 @@ variable db_disk_image {
 variable subnet_id {
   description = "Subnet for modules"
 }
+variable provision_enable {
+  description = "Provision switch"
+  default     = false
+}
