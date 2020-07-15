@@ -1,4 +1,9 @@
 #!/usr/bin/ruby
+#
+# create secrets.yml with
+# folder_id: <folder id>
+# iam_token: < iam_key  $ yc iam create-token >
+#
 require 'rest-client'
 require 'json'
 require 'yaml'
@@ -12,22 +17,11 @@ response = RestClient.get(url, {
 
 instances = JSON.parse(response.body)
 
-hosts_name = {}
-hosts_ip = []
+inventory = {}
+inventory.store("_meta", hostvars:{})
 
 instances['instances'].each do |i|
-  hosts_name = { name: i['name'] }
-  hosts_ip << i['networkInterfaces'][0]['primaryV4Address']['oneToOneNat']['address']
+  inventory.store(i['name'], {hosts: [i['networkInterfaces'][0]['primaryV4Address']['oneToOneNat']['address']]})
 end
-
-inventory = {
- _meta: {
-  hostvars: {}
-},
- yc: {
-  hosts: hosts_ip,
-  vars: hosts_name
-  }
-}
 
 puts inventory.to_json if ARGV[0] == "--list"
