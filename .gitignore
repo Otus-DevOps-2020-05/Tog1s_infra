@@ -1,6 +1,9 @@
 .DS_Store
 */.DS_Store
+
 key.json
+secrets.yml
+
 packer/variables.json
 packer/immutable_var.json
 
