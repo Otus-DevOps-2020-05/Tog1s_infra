@@ -146,3 +146,5 @@ enable_plugins = script
  - В первом варианте bash скрипт (cat_inventory.sh) читает содержимое файта inventory.json. Файл должен иметь определенную [структуру](https://docs.ansible.com/ansible/latest/dev_guide/developing_inventory.html#tuning-the-external-inventory-script) для корректного парсинга.
 
  - Во втором варианте скрипт (yc_instances.rb) забирает весь список инстансов из Yandex Cloud через api. Таким образом можно получать любые данные о инстансах в облаке.
+
+## ДЗ №9 Деплой и управлениеконфигурацией с Ansible
