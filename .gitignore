@@ -14,3 +14,5 @@ packer/immutable_var.json
 .terraform/
 
 **/backend.tf
+
+*.retry
