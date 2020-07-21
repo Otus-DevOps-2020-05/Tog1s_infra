@@ -16,3 +16,5 @@ packer/immutable_var.json
 **/backend.tf
 
 *.retry
+
+jdauphant.nginx
