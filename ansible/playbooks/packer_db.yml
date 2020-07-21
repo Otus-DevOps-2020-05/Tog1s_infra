@@ -3,20 +3,20 @@
   hosts: all
   become: true
   tasks:
-    - name: Add apt key and repo
+    - name: Add apt key
       apt_key:
         url: https://www.mongodb.org/static/pgp/server-4.2.asc
         state: present
-    - apt_repository:
+
+    - name:  Add apt repo
+      apt_repository:
         repo: deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.2 multiverse
         state: present
 
-    - name: Install mongod
+    - name: Install mongo
       apt:
-        package: pt-transport-https
+        package: [ pt-transport-https, mongodb-org ]
         update_cache: true
-      apt:
-        package: mongodb-org
 
     - name: enable mongod
       systemd: name=mongod enabled=yes
