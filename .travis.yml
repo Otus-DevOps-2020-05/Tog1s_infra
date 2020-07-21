@@ -4,6 +4,15 @@ language: bash
 before_install:
 - curl https://raw.githubusercontent.com/express42/otus-homeworks/2020-05/run.sh |
   bash
+
+install:
+  - curl https://gist.githubusercontent.com/Tog1s/2b5c3146b979127dd607924a2a30acb0/raw/e9294c049449aec9b3f43e4f9f6e35342e2e8475/install_packer.sh
+    bash
+
+script:
+  - packer validate -var-file=packer/variables.json.example packer/app.json
+  - packer validate -var-file=packer/variables.json.example packer/db.json
+
 notifications:
   slack:
     secure: tAp+nFtYVGNmM3FZ2GqNKLIe8Xb/suLr8s20vrt7uNwYLkBY1kHzb76YmisgAhaV42Shjm00PDddk67NPN01ZkgRC2SF/ldzkASuG+vUwDSGiXzkrgq0IPk8DZ/BLmbublJl40j+U542AVkajQJ+SuFpACNlLFPU0rsuTR1ioCXmUcOrcOrp92q8xdG8L/CBPe3j+VHZEpXjC3wSiEXwIhK/YKrMvBoHnjnt95RXipQOEyN5iQSxvAdtOR2AA5aVtklmkCeHFWZsvb7dLqJJ/ekuGjbBwaIuczuyGcG0IMnXhurcMHMLJ1NHqVM39MnLkU9zjmV7wymsXT+DNqR+VhJ3ctDbZY3LazH+XxkZbUcmQX3Lr7LzlBhjTxH4aweBS6HCJrYRRBHkw+ZR0gB7ACJkare+QJw/Sihury96dV8OErCH5PgpGvkrk1XeP7CMvPoYRyrt+OMEZjsgAlBrxM6iQDHZ9rUl4YKaDMipHX5ml6R3g5La+5R0S941orZdF67al48aberFhcMnErzkVzfANa8XXzR/R8Uus0VT+O1iSOudWBLmqjfrrM5uGsclhtz8qB/Y2R5dvzmsB53y5gVvCSebcAQLOyY8kILDwRyDBZU2ih+RzTMenOEJdiAvqtWoHYeWFJql59RcbQVV4/+0Mm0st3axl5wEmBug4W8=
