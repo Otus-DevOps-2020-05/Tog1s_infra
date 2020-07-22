@@ -11,6 +11,8 @@ chmod +x ./packer
 sudo mv -f ./packer /usr/local/bin/packer
 packer --version
 
-curl -L "$(curl -Ls https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_amd64.zip")" -o tflint.zip && unzip tflint.zip && rm tflint.zip
+wget -O tflint.zip https://github.com/terraform-linters/tflint/releases/download/v0.18.0/tflint_linux_amd64.zip
+unzip tflint.zip
+chmod +x ./tflint
 sudo mv -f ./tflint /usr/local/bin/tflint
 tflint -v
