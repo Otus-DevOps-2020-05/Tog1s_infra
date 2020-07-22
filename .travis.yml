@@ -2,16 +2,30 @@ dist: trusty
 sudo: required
 language: bash
 before_install:
-- curl https://raw.githubusercontent.com/express42/otus-homeworks/2020-05/run.sh |
-  bash
+- curl https://raw.githubusercontent.com/express42/otus-homeworks/2020-05/run.sh | bash
 
-install:
-  - curl https://gist.githubusercontent.com/Tog1s/2b5c3146b979127dd607924a2a30acb0/raw/e9294c049449aec9b3f43e4f9f6e35342e2e8475/install_packer.sh
-    bash
+jobs:
+  fast_finish: true
+  include:
+    - if: type = push AND branch IN (master) OR type = pull_request
+      before_install:
+      - pyenv install 3.6.3
+      - pyenv local 3.6.3
+      install:
+      - pip install ansible-lint
+      - cd tmp && ./travis_setup.sh
+      script:
+      - cd $TRAVIS_BUILD_DIR
+      - packer validate -var-file=packer/variables.json.example packer/app.json
+      - packer validate -var-file=packer/variables.json.example packer/db.json
+      - cd ansible/playbooks && ansible-lint
+      - cd $TRAVIS_BUILD_DIR/terraform/prod && terraform init
+      - terraform validate
+      - tflint
+      - cd $TRAVIS_BUILD_DIR/terraform/stage && terraform init
+      - terraform validate
+      - tflint
 
-script:
-  - packer validate -var-file=packer/variables.json.example packer/app.json
-  - packer validate -var-file=packer/variables.json.example packer/db.json
 
 notifications:
   slack:
