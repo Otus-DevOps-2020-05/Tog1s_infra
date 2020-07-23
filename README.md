@@ -1,6 +1,8 @@
 # Tog1s_infra
 Tog1s Infra repository
 
+[![Build Status](https://travis-ci.com/Otus-DevOps-2020-05/Tog1s_infra.svg?branch=master)](https://travis-ci.com/Otus-DevOps-2020-05/Tog1s_infra)
+
 ## ДЗ №3 Запуск VM в YC
 
 ### Задание
@@ -162,3 +164,36 @@ enable_plugins = script
 - Сформировать json ответ от внешних утилит, например из Terraform.
 
 В данном решении реализован внешний скрипт получающий актуальные данные о инфраструктуре в облаке. Скрипт работает через API Yandex Cloud.
+
+## ДЗ №10 Ansible: работа с ролями и окружениями
+
+- Организация плейбуков в роли с помощью ansible-galaxy.
+- Описаны окружения stage и prod.
+- Добавлена комьюнити роль jdauphant.nginx.
+- Проверена работоспособность приложения на 80 порту
+- Созданы файлы и credentials.yml для окружений и зашифрованы с помощью ansible-vault.
+- Добавлен динамический инвентори для окружений.
+
+### Работа с Ansible Vault
+
+- Созданы файлы credentials.yml.
+- Создан playbook user.yml.
+- Создан vaul.key.
+- Зашифрованы файлы credentials.yml.
+
+Комманды для работы с ansible vault:
+```bash
+ansible-vault encrypt <file>
+ansible-vault edit <file>
+ansible-vault decrypt <fiel>
+```
+
+### Задание со *
+
+Созданы линки на скрипт yc_instances.rb, так как на текущем этапе нет различий в работе stage и prod окружений. В скрипт добавлен функционал для работы с hostvars, что позволяет не обновлять каждый раз переменную db_host в group_vars.
+
+### Задание со **
+
+Job в Travis разбит на два стейджа, в первом тестируется ДЗ скриптом otus-homeworks во втором запускается валидация и линтеры при commit или pull request.
+Добавлена папка test для локальных тестов и скрипт для установки приложений в Travis.
+Добавлен бейдж со статусом билда в начало Readme.md.

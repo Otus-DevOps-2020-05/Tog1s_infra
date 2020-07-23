@@ -1,9 +1,29 @@
 dist: trusty
 sudo: required
-language: bash
-before_install:
-- curl https://raw.githubusercontent.com/express42/otus-homeworks/2020-05/run.sh |
-  bash
+jobs:
+  include:
+    - stage: Otus Test
+      language: bash
+      before_install:
+      - curl https://raw.githubusercontent.com/express42/otus-homeworks/2020-05/run.sh | bash
+
+    - stage: Lint and Validate
+      if: (type = push AND branch = master) OR type = pull_request
+      language: python
+      install:
+        - pip install ansible-lint
+        - cd test && ./travis_setup.sh
+      script:
+        - cd $TRAVIS_BUILD_DIR
+        - packer validate -var-file=packer/variables.json.example packer/app.json
+        - packer validate -var-file=packer/variables.json.example packer/db.json
+        - cd ansible/playbooks && ansible-lint
+        - cd $TRAVIS_BUILD_DIR/terraform/prod && terraform init
+        - terraform validate
+        - tflint
+        - cd $TRAVIS_BUILD_DIR/terraform/stage && terraform init
+        - terraform validate
+        - tflint
 notifications:
   slack:
     secure: tAp+nFtYVGNmM3FZ2GqNKLIe8Xb/suLr8s20vrt7uNwYLkBY1kHzb76YmisgAhaV42Shjm00PDddk67NPN01ZkgRC2SF/ldzkASuG+vUwDSGiXzkrgq0IPk8DZ/BLmbublJl40j+U542AVkajQJ+SuFpACNlLFPU0rsuTR1ioCXmUcOrcOrp92q8xdG8L/CBPe3j+VHZEpXjC3wSiEXwIhK/YKrMvBoHnjnt95RXipQOEyN5iQSxvAdtOR2AA5aVtklmkCeHFWZsvb7dLqJJ/ekuGjbBwaIuczuyGcG0IMnXhurcMHMLJ1NHqVM39MnLkU9zjmV7wymsXT+DNqR+VhJ3ctDbZY3LazH+XxkZbUcmQX3Lr7LzlBhjTxH4aweBS6HCJrYRRBHkw+ZR0gB7ACJkare+QJw/Sihury96dV8OErCH5PgpGvkrk1XeP7CMvPoYRyrt+OMEZjsgAlBrxM6iQDHZ9rUl4YKaDMipHX5ml6R3g5La+5R0S941orZdF67al48aberFhcMnErzkVzfANa8XXzR/R8Uus0VT+O1iSOudWBLmqjfrrM5uGsclhtz8qB/Y2R5dvzmsB53y5gVvCSebcAQLOyY8kILDwRyDBZU2ih+RzTMenOEJdiAvqtWoHYeWFJql59RcbQVV4/+0Mm0st3axl5wEmBug4W8=

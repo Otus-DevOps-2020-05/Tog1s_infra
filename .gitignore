@@ -3,6 +3,7 @@
 
 key.json
 secrets.yml
+vault.key
 
 packer/variables.json
 packer/immutable_var.json
@@ -16,3 +17,5 @@ packer/immutable_var.json
 **/backend.tf
 
 *.retry
+
+jdauphant.nginx
