@@ -149,7 +149,7 @@ enable_plugins = script
 
  - Во втором варианте скрипт (yc_instances.rb) забирает весь список инстансов из Yandex Cloud через api. Таким образом можно получать любые данные о инстансах в облаке.
 
-## ДЗ №9 Деплой и управлениеконфигурацией с Ansible
+## ДЗ №9 Ansible: деплой и управлениеконфигурацией
 
 - Рассмотрена конфигурация Ansible одним плейбуком.
 - Рассмотрена конфигурация Ansible одним плейбуком с разделением на несколько сценариев.
@@ -197,3 +197,46 @@ ansible-vault decrypt <fiel>
 Job в Travis разбит на два стейджа, в первом тестируется ДЗ скриптом otus-homeworks во втором запускается валидация и линтеры при commit или pull request.
 Добавлена папка test для локальных тестов и скрипт для установки приложений в Travis.
 Добавлен бейдж со статусом билда в начало Readme.md.
+
+## ДЗ №11 Ansible: разработка ролей с Vagrant
+
+- Установлен Vagrant, VirtualBox.
+- Создан Vagrantfile с описание виртуальных машин для тестирования.
+- Доработаны роли app, db в ansible (добавлена установка пакетов, сервисов).
+- Добавлены провиженеры в Vagrantfile
+- Добавлен playbook с установкой python.
+
+### Задание со *
+В случае как и с юзером в extra_vars добавляем хеш с параметрами nginx.
+```ruby
+"nginx_sites" => {
+  "default" => [
+    "listen 80",
+    "server_name 'reddit'",
+    "location / { proxy_pass http://#{app_server_ip}:9292; }"
+  ]
+}
+```
+
+### Тестирование ролей
+
+- Установлены molecule, testinfra, vagrant driver.
+- Протестирована роль db с помощью molecule.
+
+Создание сценария:
+```bash
+molecule init scenario -r db
+```
+#### Самостоятельно:
+- Добавлен тест сокета mongodb:
+```python
+def test_socket(host):
+    assert host.socket("tcp://0.0.0.0:27017").is_listening
+```
+- Изменены плейбуки packer_db, packer_app для использование ролей.
+- Изменены шаблоны packer для использования ролей ansible.
+
+### Задание со *
+
+Создан отдельный репозитория для роли db:
+https://github.com/Tog1s/ansible-role-mongodb.git
