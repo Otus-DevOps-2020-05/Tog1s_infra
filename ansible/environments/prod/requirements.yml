@@ -1,2 +1,6 @@
 - src: jdauphant.nginx
   version: v2.21.2
+
+- src: https://github.com/Tog1s/ansible-role-mongodb.git
+  scm: git
+  version: master

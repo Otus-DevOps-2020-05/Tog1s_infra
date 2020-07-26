@@ -26,3 +26,4 @@ packer/immutable_var.json
 *.retry
 
 jdauphant.nginx
+ansible-role-mongodb
