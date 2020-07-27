@@ -240,3 +240,5 @@ def test_socket(host):
 
 Создан отдельный репозитория для роли db:
 https://github.com/Tog1s/ansible-role-mongodb.git
+
+ Добавлены тесты в Travis CI с помощью Docker. Добавлены уведомления в чат.
