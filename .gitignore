@@ -14,8 +14,16 @@ packer/immutable_var.json
 *.tfvars
 .terraform/
 
+.vagrant/
+*.log
+*.pyc
+.molecule
+.cache
+.pytest_cache
+
 **/backend.tf
 
 *.retry
 
 jdauphant.nginx
+ansible-role-mongodb

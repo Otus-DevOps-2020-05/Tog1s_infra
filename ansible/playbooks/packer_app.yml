@@ -2,9 +2,5 @@
 - name: Configure app
   hosts: all
   become: true
-  tasks:
-    - name: Install ruby and git
-      become: true
-      apt:
-        package: ['ruby-full', 'ruby-bundler', 'build-essential', 'git']
-        update_cache: true
+  roles:
+    - app
